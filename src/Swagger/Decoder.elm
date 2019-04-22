@@ -1,4 +1,4 @@
-module Swagger.Decoder exposing (..)
+module Swagger.Decoder exposing (swaggerDecoder)
 
 import Json.Decode as D exposing (Decoder, maybe)
 import Json.Decode.Pipeline exposing (required, optional)
