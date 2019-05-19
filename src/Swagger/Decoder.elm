@@ -1,14 +1,20 @@
 module Swagger.Decoder exposing (swaggerDecoder)
 
+{-|  This module defines the decoder for the `SwaggerSpecification` type
+
+@docs swaggerDecoder
+-}
+
 import Json.Decode as D exposing (Decoder, maybe)
 import Json.Decode.Pipeline exposing (required, optional)
 import Either.Decode exposing (either)
 
 import Swagger.Types exposing (..)
 
+{-| -}
 swaggerDecoder : Decoder SwaggerSpecification
 swaggerDecoder = D.field "swagger" D.string
-    |> D.andThen (\swaggerVersion -> 
+    |> D.andThen (\swaggerVersion ->
             if swaggerVersion == "2.0" then
                 D.succeed SwaggerSpecification
                     |> required "info" infoDecoder
@@ -35,7 +41,7 @@ infoDecoder =
 contactDecoder : Decoder Contact
 contactDecoder =
     D.succeed Contact
-        |> optional "name" (maybe D.string) Nothing 
+        |> optional "name" (maybe D.string) Nothing
         |> optional "url" (maybe D.string) Nothing
         |> optional "email" (maybe D.string) Nothing
 
@@ -47,7 +53,7 @@ licenseDecoder =
 
 schemeDecoder : Decoder Scheme
 schemeDecoder =
-    D.string |> D.andThen (\x -> 
+    D.string |> D.andThen (\x ->
         case x of
             "http" -> D.succeed Http
             "https" -> D.succeed Https
@@ -92,7 +98,7 @@ operationDecoder =
 
 
 externalDocsDecoder : Decoder ExternalDocs
-externalDocsDecoder = 
+externalDocsDecoder =
     D.succeed ExternalDocs
         |> optional "description" (maybe D.string) Nothing
         |> required "url" D.string
@@ -141,7 +147,7 @@ schemaDecoder =
 
 parameterInDecoder : Decoder ParameterIn
 parameterInDecoder =
-    D.string |> D.andThen (\x -> 
+    D.string |> D.andThen (\x ->
         case x of
             "query" -> D.succeed Query
             "header" -> D.succeed Header_
@@ -153,7 +159,7 @@ parameterInDecoder =
 
 collectionFormatDecoder : Decoder CollectionFormat
 collectionFormatDecoder =
-    D.string |> D.andThen (\x -> 
+    D.string |> D.andThen (\x ->
         case x of
             "csv" -> D.succeed Csv
             "ssv" -> D.succeed Ssv
@@ -204,5 +210,5 @@ headerDecoder =
 exampleDecoder : Decoder Example
 exampleDecoder = D.dict D.value
 
-securityRequirementDecoder : Decoder SecurityRequirement 
+securityRequirementDecoder : Decoder SecurityRequirement
 securityRequirementDecoder = D.dict <| D.list D.string
