@@ -1,4 +1,8 @@
-module Swagger.Types exposing (..)
+module Swagger.Types exposing (SwaggerSpecification, Info, Contact, License,
+                               Scheme(..), Paths, PathItem, Operation, ExternalDocs,
+                               Parameter, ParameterIn(..), ParameterBody(..), ParameterBodyOthersBody,
+                               Items(..), ItemsBody, CollectionFormat(..), Schema(..), Reference,
+                               Responses, Response, Header, Headers, Example, SecurityRequirement)
 
 import Json.Decode as D
 import Either exposing (Either)
@@ -103,7 +107,7 @@ type alias ParameterBodyOthersBody =
 
 
 type Items = Items ItemsBody
-    
+
 type alias ItemsBody =
     { type_ : String
     , format : Maybe String
