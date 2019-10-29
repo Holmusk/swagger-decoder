@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "Holmusk/swagger-decoder",
-    "summary": "Type definiitions and decoders for working with swagger.json",
+    "summary": "Type definitions and decoders for working with swagger.json",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": [
